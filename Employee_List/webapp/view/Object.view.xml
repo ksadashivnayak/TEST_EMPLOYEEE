@@ -1,0 +1,29 @@
+<mvc:View controllerName="com.E.Employee_List.controller.Object" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.f.semantic">
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false" busy="{objectView>/busy}"
+		busyIndicatorDelay="{objectView>/delay}">
+		<semantic:titleHeading>
+			<Title text="{FirstName}" level="H2"/>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+			<ObjectNumber number="{ path: 'EmployeeID' }"/>
+		</semantic:headerContent>
+		<semantic:content>
+			<IconTabBar id="idIconTabBarFiori2" upperCase="true" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
+				<items> 
+					<IconTabFilter text="Proposed Job" count="{EmployeeID}">   
+						<Text text="Proposed Job"/>
+					</IconTabFilter>
+					<IconTabFilter text="Job History" >
+						<Text text="History"/>
+					</IconTabFilter>
+					<IconTabFilter text="PayRoll" >
+						<Text text="Payroll"/>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</semantic:content>
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+		</semantic:sendEmailAction>
+	</semantic:SemanticPage>
+</mvc:View>

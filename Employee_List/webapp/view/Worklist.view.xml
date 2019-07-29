@@ -1,0 +1,126 @@
+<mvc:View
+	controllerName="com.E.Employee_List.controller.Worklist"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core"
+	>
+
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title
+				text="{i18n>worklistTitle}"
+				level="H2"/>
+		</semantic:titleHeading>
+		
+		
+			
+		<semantic:content>
+			<Table
+				id="table"
+				width="auto"
+				items="{
+					path: '/Employees',
+					sorter: {
+						path: 'FirstName',
+						descending: false
+					}
+				}"
+				noDataText="{worklistView>/tableNoDataText}"
+				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+				growing="true"
+				growingScrollToLoad="true"
+				updateFinished=".onUpdateFinished">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title
+							id="tableHeader"
+							text="LastName"
+							level="H3"/>
+						<ToolbarSpacer />
+						<SearchField
+							id="searchLastName"
+							tooltip="LastName"
+							placeholder = "LastName"
+							enableSuggestions="true"
+							search=".onSearchLastName"
+							suggest=".onSuggestLastName">
+							<layoutData>
+								<OverflowToolbarLayoutData
+									maxWidth="200px"
+									priority="NeverOverflow"/>
+							</layoutData>
+						</SearchField>
+						<SearchField
+							id="searchField"
+							tooltip="FirstName"
+							placeholder = "FirstName"
+							search=".onSearch">
+							<layoutData>
+								<OverflowToolbarLayoutData
+									maxWidth="200px"
+									priority="NeverOverflow"/>
+							</layoutData>
+						</SearchField>
+						<SearchField
+							id="searchId"
+							tooltip="EmployeeID"
+							placeholder = "EmployeeID"
+							search=".onSearchId">
+							<layoutData>
+								<OverflowToolbarLayoutData
+									maxWidth="200px"
+									priority="NeverOverflow"/>
+							</layoutData>
+						</SearchField>
+					</OverflowToolbar>
+				</headerToolbar>
+
+				<columns sortIndicator="true">
+					<Column id="nameColumn" >
+						<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+					</Column>
+					<Column id="LastName">
+						<Text text="Last Name" id="LastName1"/>
+					</Column>
+					<Column id="HireDate">
+						<Text text="Hire Date" id="HireDate1"/>
+					</Column>
+					<Column id="unitNumberColumn" hAlign="End">
+						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem
+						type="Navigation"
+						press=".onPress">
+						<cells>
+							<ObjectIdentifier
+								title="{FirstName}"/>
+							<Text	text="{LastName}" />
+							<Text	text="{HireDate}" />
+							<ObjectNumber
+								number="{
+									path: 'EmployeeID'
+								}"/>
+						</cells>
+						
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+
+	</semantic:SemanticPage>
+
+</mvc:View>
